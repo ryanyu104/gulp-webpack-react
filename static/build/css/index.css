@@ -1,0 +1,23 @@
+div {
+  background: #fff;
+  color: #f00;
+}
+p {
+  background-color: #008000;
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 20%;
+  margin-left: 0%;
+  margin-right: 0%;
+  line-height: 1.8;
+}
+p:before,
+p:after {
+  content: '';
+  display: table;
+}
+p:after {
+  clear: both;
+}
