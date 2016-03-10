@@ -8,8 +8,9 @@
     "gulp": "gulp",
     "gulp:dev": "gulp dev",
     "clean": "gulp clean",
+    "server": "webpack-dev-server",
     "webpack:dev": "webpack --display-error-details -w",
-    "dev": "npm run webpack:dev & npm run gulp:dev",
+    "dev": "npm run webpack:dev & npm run gulp:dev & npm run server",
     "test": "karma start"
   },
   "author": "",

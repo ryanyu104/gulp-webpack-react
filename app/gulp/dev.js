@@ -5,6 +5,7 @@ var gulp = require('gulp')
 var stylus = require('gulp-stylus')
 var include = require('gulp-include')
 var replace = require('gulp-replace')
+var sourcemaps = require('gulp-sourcemaps')
 var webpack = require('webpack')
 var livereload = require('gulp-livereload')
 var nib = require('nib')
@@ -24,7 +25,9 @@ gulp.task('build-html', function () {
 // 编译styl
 gulp.task('build-stylus', function () {
   return gulp.src(['app/css/**/*.styl', '!app/css/**/_*.styl'])
+    .pipe(sourcemaps.init())
     .pipe(stylus({ use: [nib(), jeet()], 'include css': true }))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest('static/build/css'))
     .pipe(livereload())
 })
