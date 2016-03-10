@@ -6,6 +6,8 @@ var stylus = require('gulp-stylus')
 var include = require('gulp-include')
 var replace = require('gulp-replace')
 var sourcemaps = require('gulp-sourcemaps')
+var plumber = require('gulp-plumber')
+var cache = require('gulp-cached')
 var webpack = require('webpack')
 var livereload = require('gulp-livereload')
 var nib = require('nib')
@@ -17,6 +19,7 @@ var REG_BUILD = global.REG_BUILD
 
 gulp.task('build-html', function () {
   return gulp.src('app/html/**/*.html')
+    .pipe(cache())
     .pipe(replace(REGEX, REG_BUILD))
     .pipe(gulp.dest('templates'))
     .pipe(livereload())
@@ -25,6 +28,8 @@ gulp.task('build-html', function () {
 // 编译styl
 gulp.task('build-stylus', function () {
   return gulp.src(['app/css/**/*.styl', '!app/css/**/_*.styl'])
+    .pipe(cache())
+    .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(stylus({ use: [nib(), jeet()], 'include css': true }))
     .pipe(sourcemaps.write())
@@ -42,12 +47,14 @@ gulp.task('base-js', function () {
 
 gulp.task('webpack-js', function () {
   return gulp.src('static/build/webpack/**/*.js')
+    .pipe(cache())
     .pipe(gulp.dest('static/build/js'))
     .pipe(livereload())
 })
 
 gulp.task('build-img', function () {
   return gulp.src('app/img/*')
+    .pipe(cache())
     .pipe(gulp.dest('static/build/img'))
     .pipe(livereload())
 })
