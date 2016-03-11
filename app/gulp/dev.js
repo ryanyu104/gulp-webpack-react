@@ -7,6 +7,7 @@ var include = require('gulp-include')
 var replace = require('gulp-replace')
 var sourcemaps = require('gulp-sourcemaps')
 var plumber = require('gulp-plumber')
+var mincss = require('gulp-cssnano')
 var cache = require('gulp-cached')
 var webpack = require('webpack')
 var livereload = require('gulp-livereload')
@@ -32,6 +33,7 @@ gulp.task('build-stylus', function () {
     .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(stylus({ use: [nib(), jeet()], 'include css': true }))
+    .pipe(mincss({ safe: true }), replace(REGEX, REG_BUILD))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('static/build/css'))
     .pipe(livereload())
@@ -78,5 +80,4 @@ gulp.task('dev', ['webpack-js', 'base-js', 'build-stylus', 'build-html', 'build-
   gulp.watch('static/build/webpack/**/*.js', function () {
     gulp.start('webpack-js')
   })
-
 })

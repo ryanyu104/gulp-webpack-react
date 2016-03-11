@@ -1,10 +1,1 @@
-div {
-  background: #fff;
-  color: #f00;
-}
-p {
-  background-color: #f00;
-  color: #fff;
-}
-
-/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid2ludGVyL3dpbnRlci5jc3MiLCJzb3VyY2VzIjpbIndpbnRlci9tb2RzL19pbmRleC5zdHlsIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsWUFBWSxLQUFaO0VBQ0EsT0FBTyxLQUFQOztBQUVGO0VBQ0Usa0JBQWtCLEtBQWxCO0VBQ0EsT0FBTyxLQUFQIiwic291cmNlUm9vdCI6Ii9zb3VyY2UvIiwic291cmNlc0NvbnRlbnQiOlsiZGl2XG4gIGJhY2tncm91bmQ6IHdoaXRlXG4gIGNvbG9yOiByZWRcbiAgY2xlYXJmaXgoKVxucFxuICBiYWNrZ3JvdW5kLWNvbG9yOiByZWRcbiAgY29sb3I6IHdoaXRlXG4gIHNwYW4oMS8zKVxuIl19 */
+div{background:#fff;color:red}p{background-color:red;color:#fff}
