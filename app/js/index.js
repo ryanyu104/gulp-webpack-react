@@ -5,13 +5,6 @@ dlg_loading({
   loading_title: '我是hbs头部3'
 })
 
-$('.js-article').on('click', function () {
-  console.log('p1')
-})
-$('img').on('click', function () {
-  $('.js-article').trigger('click')
-})
+$('p').css('color','red')
+
 ReactDOM.render(<App/>, document.getElementById('phone_form'))
-
-
-

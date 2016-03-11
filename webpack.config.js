@@ -8,9 +8,10 @@ var JS_PATH = path.resolve(ROOT_PATH, 'app/js');
 
 function getEntry() {
   var dirs = glob.sync(['./app/js/**/*.js',
-    '!./app/js/**/_*.js',
-    '!./app/js/lib/**/*.js',
-    '!./app/js/mods/**/*.js'
+                        '!./app/js/**/_*.js',
+                        '!./app/js/lib/**/*.js',
+                        '!./app/js/mods/**/*.js',
+                        '!./app/js/utils/**/*.js'
   ])
   var files = {};
   dirs.forEach(function (item) {
@@ -33,15 +34,6 @@ module.exports = {
   jshint: {
     "esnext": true
   },
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      minimize: true
-    }),
-    new webpack.ProvidePlugin({
-      jQuery: "jquery",
-      $: "jquery"
-    })
-  ],
   devServer: {
     hot: true,
     inline: true,
@@ -57,11 +49,13 @@ module.exports = {
     perLoaders: [{
       test: /\.jsx?$/,
       include: JS_PATH,
+      exclude: /node_modules/,
       loader: 'jshint-loader'
     }],
     loaders: [{
       test: /\.jsx?$/,
       loader: 'babel-loader',
+      exclude: /node_modules/,
       include: JS_PATH
     }, {
       test: /\.hbs/,
