@@ -10,7 +10,7 @@
     "clean": "gulp clean",
     "server": "webpack-dev-server",
     "webpack:dev": "webpack --display-error-details",
-    "dev": "npm run webpack:dev & npm run gulp:dev & npm run server",
+    "dev": "NODE_ENV=development npm run webpack:dev & NODE_ENV=development npm run gulp:dev & npm run server",
     "test": "karma start"
   },
   "author": "",

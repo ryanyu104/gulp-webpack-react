@@ -5,6 +5,6 @@ dlg_loading({
   loading_title: '我是hbs头部3'
 })
 
-$('p').css('color','red')
+$('.js-article').css('color','red')
 
 ReactDOM.render(<App/>, document.getElementById('phone_form'))

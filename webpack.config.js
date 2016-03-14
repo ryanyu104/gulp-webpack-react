@@ -8,10 +8,10 @@ var JS_PATH = path.resolve(ROOT_PATH, 'app/js');
 
 function getEntry() {
   var dirs = glob.sync(['./app/js/**/*.js',
-                        '!./app/js/**/_*.js',
-                        '!./app/js/lib/**/*.js',
-                        '!./app/js/mods/**/*.js',
-                        '!./app/js/utils/**/*.js'
+    '!./app/js/**/_*.js',
+    '!./app/js/lib/**/*.js',
+    '!./app/js/mods/**/*.js',
+    '!./app/js/utils/**/*.js'
   ])
   var files = {};
   dirs.forEach(function (item) {
@@ -45,6 +45,13 @@ module.exports = {
       }
     }
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
+      }
+    })
+  ],
   module: {
     perLoaders: [{
       test: /\.jsx?$/,
