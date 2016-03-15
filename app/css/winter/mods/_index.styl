@@ -1,8 +1,25 @@
-div
-  background: white
-  color: red
-  clearfix()
-p
-  background-color: red
-  color: white
-  span(1/3)
+.center-block
+  width: 1200px
+  margin: 0 auto
+  text-align: center
+  h2
+    font-size: 5vw
+  div
+    background: white
+    color: red
+    clearfix()
+  p
+    span(1/5)
+    line-height: 1.8
+    background: linear-gradient(top, white, black)
+  img
+    width: 400px
+    display: inline-block
+  .img-box
+    width: 300px
+    height: 267px
+    border-radius(20px)
+    display: inline-block
+    background: url('{{{img/about.jpg}}}')
+    background-size: cover
+    transform: rotate(7deg)

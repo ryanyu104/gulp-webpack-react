@@ -3,6 +3,7 @@ var gulp = require('gulp')
 
 // 引入组件
 var stylus = require('gulp-stylus')
+var fs = require('fs')
 var include = require('gulp-include')
 var replace = require('gulp-replace')
 var sourcemaps = require('gulp-sourcemaps')
@@ -19,11 +20,37 @@ var IMG_FILE = global.IMG_FILE
 var REGEX = global.REGEX
 var REG_BUILD = global.REG_BUILD
 
+
+var css_path = 'app/css'
+var dirs = fs.readdirSync(css_path)
+var STYLUS_TASKS = []
+
+dirs.forEach(function (item) {
+  if (fs.statSync(css_path + '/' + item).isDirectory()) {
+    STYLUS_TASKS.push(item)
+  }
+})
+
+for (var i = 0; i < STYLUS_TASKS.length; i++) {
+  (function (i) {
+    gulp.task('build-stylus-' + STYLUS_TASKS[i], function () {
+      return gulp.src(['app/css/' + STYLUS_TASKS[i] + '/*.styl', '!app/css/' + STYLUS_TASKS[i] + '/_*.styl'])
+        .pipe(gulpif(!global.is_production, plumber()))
+        .pipe(gulpif(!global.is_production, sourcemaps.init()))
+        .pipe(stylus({ use: [nib(), jeet()], 'include css': true }))
+        .pipe(gulpif(!global.is_production, sourcemaps.write()))
+        .pipe(replace(REGEX, REG_BUILD))
+        .pipe(gulp.dest('static/build/css/' + STYLUS_TASKS[i]))
+        .pipe(liveload())
+    })
+  })(i)
+}
+
 gulp.task('build-html', function () {
   return gulp.src('app/html/**/*.html')
     .pipe(cache())
-    .pipe(replace(REGEX, REG_BUILD))
-    .pipe(gulp.dest('templates'))
+    .pipe(gulpif(!global.is_production, replace(REGEX, REG_BUILD)))
+    .pipe(gulpif(!global.is_production, gulp.dest('templates'), gulp.dest('static/build/html')))
     .pipe(livereload())
 })
 
@@ -64,6 +91,7 @@ gulp.task('build-img', function () {
 
 // 默认任务
 gulp.task('dev', ['webpack-js', 'base-js', 'build-stylus', 'build-html', 'build-img'], function () {
+  global.is_production = false
   livereload.listen()
     // 监听文件变化
   gulp.watch('app/js/lib/*.js', function () {
