@@ -7,10 +7,13 @@
     "webpack": "webpack",
     "gulp": "gulp",
     "gulp:dev": "gulp dev",
+    "gulp:release": "gulp release",
     "clean": "gulp clean",
     "server": "webpack-dev-server",
-    "webpack:dev": "webpack --display-error-details",
+    "webpack:dev": "webpack --display-error-details -w",
+    "webpack:release": "webpack",
     "dev": "npm run webpack:dev & npm run gulp:dev & npm run server",
+    "release": "npm run webpack:release && npm run gulp:release",
     "test": "karma start"
   },
   "author": "",
@@ -70,6 +73,7 @@
     "style-loader": "^0.13.0",
     "stylus-loader": "^1.5.0",
     "url-loader": "^0.5.7",
+    "vue": "^1.0.17",
     "webpack": "^1.12.14",
     "webpack-dev-middleware": "^1.5.1",
     "webpack-dev-server": "^1.14.1"

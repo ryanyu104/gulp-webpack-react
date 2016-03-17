@@ -41,7 +41,7 @@ for (var i = 0; i < STYLUS_TASKS.length; i++) {
         .pipe(gulpif(!global.is_production, sourcemaps.write()))
         .pipe(replace(REGEX, REG_BUILD))
         .pipe(gulp.dest('static/build/css/' + STYLUS_TASKS[i]))
-        .pipe(liveload())
+        .pipe(livereload())
     })
   })(i)
 }
@@ -61,8 +61,8 @@ gulp.task('build-stylus', function () {
     .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(stylus({ use: [nib(), jeet()], 'include css': true }))
-    .pipe(gulpif(global.is_production, mincss({ safe: true }), replace(REGEX, REG_BUILD)))
     .pipe(sourcemaps.write())
+    .pipe(gulpif(global.is_production, mincss({ safe: true }), replace(REGEX, REG_BUILD)))
     .pipe(gulp.dest('static/build/css'))
     .pipe(livereload())
 })
@@ -93,6 +93,14 @@ gulp.task('build-img', function () {
 gulp.task('dev', ['webpack-js', 'base-js', 'build-stylus', 'build-html', 'build-img'], function () {
   global.is_production = false
   livereload.listen()
+
+  for(var i=0; i<STYLUS_TASKS.length; i++) {
+    (function(i) {
+      gulp.watch('app/css/' + STYLUS_TASKS[i] +'/**/*.styl', function() {
+        gulp.start('build-stylus-'+STYLUS_TASKS[i])
+      })
+    })(i)
+  }
     // 监听文件变化
   gulp.watch('app/js/lib/*.js', function () {
     gulp.start('base-js')
