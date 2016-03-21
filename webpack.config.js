@@ -60,11 +60,14 @@ module.exports = {
     }, {
       test: /\.hbs/,
       loader: 'handlebars-loader'
+    }, {
+      test: /\.vue$/,
+      loader: 'vue-loader'
     }]
   },
   resolve: {
     root: JS_PATH,
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['', '.js', '.jsx', '.vue'],
     alias: {
       "g-loading$": 'mods/modal/loading.js'
     }
